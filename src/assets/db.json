@@ -35,6 +35,12 @@
       "title": "Post 5",
       "body": "Some random post5",
       "userId": 5
+    },
+    {
+      "id": 4,
+      "title": "Post 6",
+      "body": "Some random post6",
+      "userId": 5
     }
   ]
 }
