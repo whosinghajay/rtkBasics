@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "title": "Post1",
+      "body": "Some random posts",
+      "userId": "23",
+      "id": 1
+    },
+    {
+      "title": "Post2",
+      "body": "Some random posts2",
+      "userId": "24",
+      "id": 2
+    },
+    {
+      "id": 801.6574568680022,
+      "title": "Post 3",
+      "body": "Some random post3",
+      "userId": 281.15439643767235
+    },
+    {
+      "id": 843,
+      "title": "Post 4",
+      "body": "Some random post4",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "title": "666",
+      "body": "666",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "title": "Post 5",
+      "body": "Some random post5",
+      "userId": 5
+    }
+  ]
+}

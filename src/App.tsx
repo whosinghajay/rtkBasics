@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { FormEvent, useState } from "react";
+import PostCard, { PostCardType } from "./components/PostCard";
+import { useGetPostsQuery, useNewPostMutation } from "./redux/api";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const { isLoading, isError, isSuccess, data, error } = useGetPostsQuery("");
+  console.log(isLoading, isError, isSuccess, data, error);
+
+  const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
+
+  const [newPost] = useNewPostMutation();
+
+  const onsubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const post: PostCardType = {
+      title,
+      body,
+      userId: Math.floor(Math.random() * 10),
+      id: Math.ceil(Math.random() * 10),
+    };
+
+    newPost(post);
+    setTitle("")
+    setBody("")
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <h1>My Posts</h1>
 
-export default App
+      <form onSubmit={onsubmitHandler}>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Body"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        data?.map((i) => <PostCard key={i.id} post={i} />)
+      )}
+    </div>
+  );
+};
+
+export default App;
